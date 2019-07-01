@@ -22,7 +22,6 @@ function createAuth() {
   const {subscribe, set, update} = writable();
   async function login(credentials) {
     const user = await post('auth/login/', credentials);
-    console.log("user",user)
     set({user});
     return user;
   };
@@ -45,8 +44,7 @@ function createAuth() {
 
   async function get(endpoint, params = {}) {
     const url = await Object.keys(params).length === 0 ? endpoint : endpoint + '?' + query(params);
-    const data = await post('auth/get', {url});
-    return data;
+    return await post('auth/get', {url});
   };
 
   return {subscribe, login, logout, register, save, get};

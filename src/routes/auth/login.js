@@ -6,7 +6,6 @@ export function post(req, res) {
 	api.post('auth/login', { user }).then(response => {
 		if (response.user) req.session.user = response.user;
 		res.setHeader('Content-Type', 'application/json');
-
 		res.end(JSON.stringify(response));
 	});
 }

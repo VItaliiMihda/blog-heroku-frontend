@@ -2,6 +2,7 @@
   import {goto, stores} from '@sapper/app';
   import ListErrors from '../../components/ListErrors.svelte';
   import {post} from '../../library/api';
+  import cookie from 'js-cookie'
 
   const {session} = stores();
 
@@ -17,6 +18,7 @@
     if (response.token) {
       $session.user = {...response};
       window.localStorage.setItem('token', response.token);
+      cookie.set('token', response.token);
       goto('/');
     }
   }
