@@ -17,7 +17,6 @@
     errors = response.errors;
     if (response.token) {
       $session.user = {...response};
-      window.localStorage.setItem('token', response.token);
       cookie.set('token', response.token);
       goto('/');
     }
