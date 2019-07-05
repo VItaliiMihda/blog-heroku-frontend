@@ -2,7 +2,7 @@
   export async function preload({params, query}) {
     // the `slug` parameter is available because
     // this file is called [slug].html
-    const res = await this.fetch(`http://0.0.0.0:5000/api/v1/blog/post/${params.slug}/`);
+    const res = await this.fetch(`${process.env.HOST}/api/v1/blog/post/${params.slug}/`);
     const data = await res.json();
 
     if (res.status === 200) {

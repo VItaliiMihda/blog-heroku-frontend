@@ -35,7 +35,7 @@
     </div>
 	  {#if $session.user}
         <div class="media ml-2 pr-2">
-          <img src="http://localhost:5000{$session.user.avatar}" class="bd-placeholder-img mr-2 rounded" width="38"
+          <img src={process.env.HOST}{$session.user.avatar} class="bd-placeholder-img mr-2 rounded" width="38"
                height="38"
                alt="...">
           <div class="media-body">

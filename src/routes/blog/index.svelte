@@ -1,6 +1,6 @@
 <script context="module">
   export function preload({params, query}) {
-    return this.fetch(`http://0.0.0.0:5000/api/v1/blog/`).then(r => r.json()).then(posts => {
+    return this.fetch(`${process.env.HOST}/api/v1/blog/`).then(r => r.json()).then(posts => {
       return {posts};
     });
   }

@@ -1,4 +1,4 @@
-const base = 'http://0.0.0.0:5000';
+const base = process.env.HOST;
 
 function query(params) {
 
@@ -22,7 +22,7 @@ async function send({method, path, data, token}) {
   if (token) {
     opts.headers['Authorization'] = `Token ${token}`;
   }
-
+  console.log('dasdasd',`${base}/${path}`)
   const req = await fetch(`${base}/${path}`, opts);
   const res = await req.text();
 

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const config = require('sapper/config/webpack.js');
 const pkg = require('./package.json');
+const Dotenv = require('dotenv-webpack');
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -13,6 +14,9 @@ module.exports = {
 		entry: config.client.entry(),
 		output: config.client.output(),
 		resolve: { extensions, mainFields },
+		// node: {
+		// 	fs: "empty"
+		// },
 		module: {
 			rules: [
 				{
@@ -32,6 +36,7 @@ module.exports = {
 		plugins: [
 			// pending https://github.com/sveltejs/svelte/issues/2377
 			// dev && new webpack.HotModuleReplacementPlugin(),
+			new Dotenv(),
 			new webpack.DefinePlugin({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -44,6 +49,9 @@ module.exports = {
 		entry: config.server.entry(),
 		output: config.server.output(),
 		target: 'node',
+		// node: {
+		// 	fs: "empty"
+		// },
 		resolve: { extensions, mainFields },
 		externals: Object.keys(pkg.dependencies).concat('encoding'),
 		module: {
