@@ -2,10 +2,19 @@
 
 </script>
 <script>
-  import {stores} from '@sapper/app';
+  import {stores, goto} from '@sapper/app';
+  import {post} from '../library/api';
+  import cookie from 'js-cookie'
 
   const {page, session} = stores();
-  console.log("$session", $session)
+  async function logout(event) {
+      const response = await post(`auth/logout/`, null, $session.user.token);
+      if (response.status === 200){
+        $session = {};
+        cookie.remove('token');
+      }
+
+  }
   export let segment;
 </script>
 
@@ -27,7 +36,7 @@
     <div class="form-inline">
 		{#if $session.user}
           <a class="btn btn-success mx-2" type="button" href="/profile">Profile</a>
-          <a class="btn btn-danger mx-2" type="button" href="/logout">Logout</a>
+          <a class="btn btn-danger mx-2" type="button" href="/logout" on:click|preventDefault="{logout}">Logout</a>
 		{:else}
           <a class="btn btn-warning mx-2" type="button" href="/registration">Registration</a>
           <a class="btn btn-info mx-2" type="button" href="/login">Login</a>
