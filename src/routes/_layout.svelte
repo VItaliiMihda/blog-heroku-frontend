@@ -19,21 +19,7 @@
         $session.user = {...response};
       }
     }
-    // photos = await res.json();
   });
-
-  // async function submit(event) {
-  //   const response = await post(`auth/login/`, {username, password});
-  //
-  //   // TODO handle network errors
-  //   errors = response.errors;
-  //   if (response.token) {
-  //     $session.user = {...response};
-  //     window.localStorage.setItem('token', response.token);
-  //     cookie.set('token', response.token);
-  //     goto('/');
-  //   }
-
 
   export let segment;
 </script>
