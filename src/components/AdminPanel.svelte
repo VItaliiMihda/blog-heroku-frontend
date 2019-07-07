@@ -1,4 +1,5 @@
 <script>
+    import { fade } from 'svelte/transition';
     let show = false;
     let el;
     function onToggleDropdown () {
@@ -11,6 +12,11 @@
         }
     }
 </script>
+<style>
+    .dropdown-menu{
+        display: block;
+    }
+</style>
 <!--{% block admin-panel %}-->
 <svelte:window on:click={handleDropdown}/>
 <div class="admin-panel align-items-center">
@@ -26,10 +32,15 @@
             >
             Create
     </button>
-    <div class="dropdown-menu" class:show>
-      <a class="dropdown-item" href="/post_create_url">Post</a>
-      <a class="dropdown-item" href="/tag_create_url">Tag</a>
-    </div>
+    {#if show}
+        <div
+            class="dropdown-menu"
+            transition:fade={{duration: 150}}
+            >
+          <a class="dropdown-item" href="/post_create_url">Post</a>
+          <a class="dropdown-item" href="/tag_create_url">Tag</a>
+        </div>
+    {/if}
   </div>
 </div>
 <!--{% if admin_object.author == user %}-->
