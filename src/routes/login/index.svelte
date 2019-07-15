@@ -13,8 +13,8 @@
   async function submit(event) {
     const response = await post(`auth/login/`, {username, password});
 
-    // TODO handle network errors
-    errors = response.errors;
+    if(response.hasOwnProperty('error'))
+        errors = response;
     if (response.token) {
       $session.user = {...response};
       cookie.set('token', response.token);
@@ -33,7 +33,7 @@
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Sign In</h1>
         <p class="text-xs-center">
-<!--					<a href="/register">Need an account?</a>-->
+            <a href="/registration">Need an account?</a>
         </p>
 
         <ListErrors {errors}/>
