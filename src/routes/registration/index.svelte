@@ -1,6 +1,7 @@
 <script>
   import {goto, stores} from '@sapper/app';
   import ListErrors from '../../components/ListErrors.svelte';
+  import InputField from '../../components/InputField.svelte';
   import {post} from '../../library/api';
   import cookie from 'js-cookie'
 
@@ -42,8 +43,9 @@
         </p>
 
         <ListErrors {errors}/>
-
+        {username}
         <form on:submit|preventDefault={submit}>
+          <InputField placeholder="User name" type="text" bind:value={username}/>
           <div class="form-group">
             <input class="form-control" type="text" placeholder="username" bind:value={username}>
           </div>
@@ -59,7 +61,7 @@
           <div class="form-group">
             <input class="form-control" type="password" placeholder="Password" bind:value={password}>
           </div>
-          <button class="btn btn-primary pull-xs-right" type="submit" disabled='{!username || !password}'>
+          <button class="btn btn-primary pull-xs-right" type="submit" disabled='{!username || !first_name || !last_name || !email || !password}'>
             Submit
           </button>
         </form>
